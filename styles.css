@@ -18,6 +18,10 @@
   object-fit:cover;
   filter:brightness(.8);
 }
+@media (max-width: 560px){
+  .nav a[href="#why"],
+  .nav a[href="#process"]{ display:none; }
+}
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 body{
