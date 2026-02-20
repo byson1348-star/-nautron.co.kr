@@ -678,3 +678,33 @@ section[id]{
 @supports (height: 100dvh){
   .hero{ min-height: calc(100dvh - var(--topbar-h)); }
 }
+/* ✅ Mobile fine-tune (<=560px) */
+@media (max-width: 560px){
+
+  /* 1) 연료절감 블록 제목/가독성 확실히 */
+  .hero__fuel{
+    margin-top: 18px !important;
+    background: rgba(7,10,15,.50) !important;     /* 살짝 더 진하게 */
+    border-color: rgba(255,255,255,.16) !important;
+  }
+  .fuel__headline{
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: rgba(234,240,255,.98) !important;
+    -webkit-text-fill-color: rgba(234,240,255,.98) !important;
+    text-shadow: 0 2px 16px rgba(0,0,0,.65) !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* 2) 메인 카드(글 박스)만 살짝 더 또렷하게 */
+  .hero__copy::before{
+    background: rgba(7,10,15,.52) !important;
+    border-color: rgba(255,255,255,.14) !important;
+  }
+
+  /* 3) badge(알약) 텍스트 대비 살짝 업 */
+  .badge{
+    background: rgba(7,10,15,.58) !important;
+  }
+}
