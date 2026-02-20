@@ -13,12 +13,20 @@
 }
 
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
+
+/* 수정한 부분: height:100% 제거 */
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   margin:0;
+  /* 수정한 부분: 최소 높이를 화면 꽉 차게 변경하고, 배경을 고정시킵니다. */
+  min-height: 100vh;
   font-family:"Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color:var(--text);
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  background-attachment: fixed; /* 배경 끊김(가로선) 방지 */
   padding-top: var(--topbar-h);
 }
 
@@ -274,7 +282,7 @@ h1{
 }
 
 /* =========================
-   SECTIONS (고급 전환)
+   SECTIONS
 ========================= */
 .section{
   position:relative;
@@ -410,7 +418,7 @@ h1{
   padding:14px;
   border-radius: var(--radius);
   background: rgba(12,18,34,.60);
-  border:1px solid rgba(255,255,255,.05); /* 테두리 투명도를 줄여 선을 부드럽게 완화 */
+  border:1px solid rgba(255,255,255,.05); 
   box-shadow: 0 12px 36px rgba(0,0,0,.18);
 }
 .step__no{
@@ -427,7 +435,6 @@ h1{
 /* CTA */
 .section--cta{
   background: linear-gradient(90deg, rgba(118,169,255,.16), rgba(124,255,203,.10));
-  /* 불필요한 가로선 발생을 막기 위해 border-top 제거 */
 }
 .cta{
   display:flex;
@@ -462,7 +469,6 @@ h1{
 .footer{
   padding:22px 0 34px;
   background: rgba(0,0,0,.12);
-  /* 불필요한 가로선 발생을 막기 위해 border-top 제거 */
 }
 .footer__inner{
   display:flex;
