@@ -282,11 +282,16 @@ h1{
 }
 
 /* Sections */
-.section{ padding:64px 0; }
+.section{
+  position:relative;
+  padding:64px 0;
+  background: transparent;
+}
 .section--alt{
-  background: linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+  background: rgba(255,255,255,.03);
   border-top: 1px solid rgba(255,255,255,.08);
   border-bottom: 1px solid rgba(255,255,255,.08);
+}er-bottom: 1px solid rgba(255,255,255,.08);
 }
 .section__head{
   display:flex;
