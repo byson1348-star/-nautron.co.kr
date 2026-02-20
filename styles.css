@@ -31,14 +31,6 @@ a{ color:inherit; text-decoration:none; }
   margin:0 auto;
 }
 
-/* Optional image band */
-.image-band img{
-  width:100%;
-  height:420px;
-  object-fit:cover;
-  filter:brightness(.8);
-}
-
 /* Top bar */
 .topbar{
   position:sticky;
@@ -102,18 +94,47 @@ a{ color:inherit; text-decoration:none; }
 .lang__link{ opacity:.9; }
 .lang__link:hover{ opacity:1; text-decoration:underline; }
 
-/* Hero */
+/* Hero (배경 이미지 + 오버레이) */
 .hero{
   position:relative;
   padding:80px 0 40px;
   overflow:hidden;
+
+  /* 밝게 유지하면서 텍스트 가독성 확보 */
+  background:
+    linear-gradient(180deg, rgba(7,10,15,.52) 0%, rgba(7,10,15,.78) 100%),
+    radial-gradient(900px 520px at 25% 10%, rgba(118,169,255,.12), transparent 60%),
+    url('ship-hero1.png') center/cover no-repeat;
 }
+
+/* Hero layout */
 .hero__inner{
   display:grid;
   grid-template-columns: 1.2fr .8fr;
   gap:30px;
   align-items:stretch;
 }
+
+/* Copy block: glass panel to prevent text being buried */
+.hero__copy{
+  position:relative;
+  z-index:1;
+}
+
+/* 글자 뒤에만 "유리판" */
+.hero__copy::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius:22px;
+  background: rgba(7,10,15,.34);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  z-index:-1;
+}
+
+/* Decorative background layer (kept from previous design) */
 .hero__bg{
   position:absolute; inset:-1px;
   background:
@@ -122,12 +143,8 @@ a{ color:inherit; text-decoration:none; }
   pointer-events:none;
   mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.2), transparent);
 }
-.hero{
-  background:
-    linear-gradient(180deg, rgba(7,10,15,.45) 0%, rgba(7,10,15,.70) 100%),
-    radial-gradient(800px 400px at 30% 0%, rgba(118,169,255,.18), transparent 60%),
-    url('ship-hero1.png') center/cover no-repeat;
-}
+
+/* Pill */
 .pill{
   display:inline-flex;
   align-items:center;
@@ -135,19 +152,21 @@ a{ color:inherit; text-decoration:none; }
   padding:8px 12px;
   border-radius:999px;
   background: rgba(255,255,255,.06);
-  border:1px solid var(--line);
+  border:1px solid rgba(255,255,255,.16);
   color:var(--muted);
   font-size:13px;
   margin-bottom:16px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
 
-/* H1 (fixed 2 lines via title-line spans) */
+/* H1 (2 lines fixed via spans) */
 h1{
   margin:0 0 14px;
   font-size: clamp(26px, 5.2vw, 44px);
   line-height:1.2;
   letter-spacing:-.5px;
   word-break: keep-all;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
 }
 .title-line1,
 .title-line2{ display:block; }
@@ -159,13 +178,16 @@ h1{
   color:transparent;
 }
 
+/* Lead */
 .lead{
   margin:0 0 20px;
-  color:rgba(234,240,255,.85);
+  color:rgba(234,240,255,.88);
   font-size:16px;
   line-height:1.75;
+  text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
 
+/* Buttons */
 .hero__actions{
   display:flex;
   gap:12px;
@@ -179,19 +201,21 @@ h1{
   gap:8px;
   padding:12px 16px;
   border-radius:14px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
   font-size:14px;
   transition: transform .15s ease, background .15s ease;
   white-space:nowrap;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
-.btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
+.btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
 .btn--primary{
   border-color: rgba(118,169,255,.45);
   background: linear-gradient(90deg, rgba(118,169,255,.22), rgba(124,255,203,.14));
 }
-.btn--ghost{ background: rgba(255,255,255,.04); }
+.btn--ghost{ background: rgba(255,255,255,.05); }
 
+/* Badges */
 .badges{
   display:flex;
   flex-wrap:wrap;
@@ -200,13 +224,15 @@ h1{
 }
 .badge{
   font-size:12px;
-  color:rgba(234,240,255,.86);
+  color:rgba(234,240,255,.90);
   padding:8px 10px;
   border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);
+  background: rgba(7,10,15,.35);
+  border:1px solid rgba(255,255,255,.16);
+  text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
 
+/* Right hero panel */
 .hero__panel{
   position:relative;
   display:flex;
@@ -433,31 +459,25 @@ h1{
 @media (max-width: 560px){
   .container{ width: calc(100% - 28px); }
 
-  /* Mobile hero spacing */
   .hero{ padding:56px 0 32px; }
 
-  /* H1 fixed for mobile */
+  /* mobile: keep readability */
   h1{ font-size:28px; line-height:1.25; }
-
-  /* Slightly tighter text */
   .lead{ font-size:15px; line-height:1.7; }
 
-  /* Buttons */
+  .hero__copy::before{
+    inset:-14px;
+    background: rgba(7,10,15,.45);
+    backdrop-filter: blur(8px);
+  }
+
   .btn{ padding:11px 14px; font-size:13px; }
   .hero__actions{ gap:10px; }
 
-  /* Badges */
   .badge{ font-size:11px; padding:7px 9px; }
 
-  /* Grid */
   .grid{ grid-template-columns: 1fr; }
 
-  /* Nav */
   .nav{ gap:8px; }
   .nav a{ padding:8px 8px; }
-
-  /* Optional: hide some nav links if needed (uncomment)
-  .nav a[href="#why"],
-  .nav a[href="#process"]{ display:none; }
-  */
 }
