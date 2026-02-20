@@ -557,3 +557,44 @@ h1{
     white-space:normal;
   }
 }
+/* =========================
+   FIXED TOPBAR OFFSET (MOBILE SAFE)
+   ========================= */
+
+/* 1) 고정 헤더 높이를 변수로 관리 */
+:root{
+  --topbar-h: 72px; /* 기본(PC/태블릿) */
+}
+
+/* 2) topbar가 fixed면 body(또는 main)에 여백을 줘서 가려짐 방지 */
+body{
+  padding-top: var(--topbar-h);
+}
+
+/* 3) 실제 topbar 높이가 변하는 모바일 구간에서는 값을 더 크게 */
+@media (max-width: 560px){
+  :root{
+    --topbar-h: 92px; /* 모바일에서 로고/언어/메뉴가 2줄이 될 수 있어 여유 */
+  }
+}
+
+/* 4) Hero는 기존 padding을 “고정값” 대신 변수 기반으로 */
+.hero{
+  /* 기존에 padding:140px 0 80px 같은게 있으면 아래로 교체 */
+  padding: calc(var(--topbar-h) + 48px) 0 80px;
+}
+
+/* 5) 앵커 이동(#services 등) 시에도 헤더에 가려지지 않게 */
+section[id]{
+  scroll-margin-top: calc(var(--topbar-h) + 16px);
+}
+
+/* 6) iOS/안드 모바일 브라우저에서 주소창 변화로 생기는 튐을 완화 */
+@supports (height: 100dvh){
+  .hero{ min-height: calc(100dvh - var(--topbar-h)); }
+}
+
+/* 7) 혹시 topbar 내부가 줄바꿈되며 높이가 더 커지는 경우 대비(선택) */
+.topbar{
+  min-height: var(--topbar-h);
+}
