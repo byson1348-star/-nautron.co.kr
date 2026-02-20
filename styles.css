@@ -174,9 +174,13 @@ h1{
   word-break: keep-all;
   text-shadow: 0 2px 18px rgba(0,0,0,.55);
 }
-.title-line1,
-.title-line2{ display:block; }
+.title-line1{
+  display:inline;   /* block → inline */
+}
 
+.title-line2{
+  display:block;    /* 아래줄 유지 */
+}
 .grad{
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   -webkit-background-clip:text;
