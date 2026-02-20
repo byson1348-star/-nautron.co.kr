@@ -521,11 +521,39 @@ h1{
   .nav a{ padding:8px 8px; }
 }
 /* ===== HERO TITLE (PC 2줄 / 모바일 자연 줄바꿈) ===== */
-.hero-title__line--white{
-  white-space: normal;          /* 기본은 줄바꿈 허용 */
-  max-width: 22ch;              /* 2줄로 떨어지게 폭 제한(가장 효과적) */
+.hero-title{
+  margin:0 0 20px;
+  line-height:1.18;
+  letter-spacing:-0.5px;
 }
 
-@media (max-width: 1024px){
-  .hero-title__line--white{ max-width: none; } /* 태블릿부터 자연스럽게 */
+.hero-title__line{
+  display:block;
+  word-break:keep-all;
+}
+
+/* 첫 줄 - 강제 줄바꿈 방지 */
+.hero-title__line--white{
+  font-size:clamp(30px,3.2vw,52px);
+  font-weight:800;
+  white-space:nowrap;  /* PC에서는 한줄 고정 */
+}
+
+/* 두 번째 줄 */
+.hero-title__line--grad{
+  font-size:clamp(30px,3vw,48px);
+  font-weight:800;
+  margin-top:10px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  white-space:nowrap; /* 파트너가 떨어지지 않도록 */
+}
+
+@media(max-width:900px){
+  .hero-title__line--white,
+  .hero-title__line--grad{
+    white-space:normal;
+  }
 }
