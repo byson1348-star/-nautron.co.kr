@@ -796,3 +796,8 @@ section[id]{
   text-align:center;
   width:100%;
 }
+.contact__email{
+  padding:12px 18px;
+  font-size:17px;
+  letter-spacing:0.3px;
+}
