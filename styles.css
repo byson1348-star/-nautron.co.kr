@@ -19,8 +19,10 @@
   filter:brightness(.8);
 }
 @media (max-width: 560px){
-  .nav a[href="#why"],
-  .nav a[href="#process"]{ display:none; }
+  h1{
+    font-size: 28px;
+    line-height:1.25;
+  }
 }
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
