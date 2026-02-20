@@ -769,3 +769,30 @@ section[id]{
 .contact__sub{
   text-align:center;
 }
+/* ===============================
+   PANEL CONTACT PERFECT CENTER
+================================ */
+
+.panel__contact{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.contact__label{
+  text-align:center;
+  width:100%;
+  margin-bottom:12px;
+}
+
+.contact__email{
+  display:inline-block;
+  margin:0 auto 10px auto;
+}
+
+.contact__sub{
+  text-align:center;
+  width:100%;
+}
