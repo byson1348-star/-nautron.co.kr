@@ -11,17 +11,22 @@
   --accent2:#7CFFCB;
   --shadow: 0 18px 60px rgba(0,0,0,.45);
   --radius: 18px;
+
+  /* ✅ Topbar 높이(고정바용) */
+  --topbar-h: 74px;
 }
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
+
 body{
   margin:0;
   font-family:"Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-  /* ✅ 전체 페이지 배경을 안정적인 단일 그라데이션으로 */
   background: linear-gradient(180deg, #070A0F 0%, #0B1020 100%);
   color:var(--text);
+
+  /* ✅ fixed topbar 아래로 콘텐츠가 숨지 않도록 */
+  padding-top: var(--topbar-h);
 }
 
 a{ color:inherit; text-decoration:none; }
@@ -31,22 +36,31 @@ a{ color:inherit; text-decoration:none; }
   margin:0 auto;
 }
 
-/* Top bar */
+/* =========================
+   Topbar (항상 유지: FIXED)
+========================= */
 .topbar{
-  position: sticky;
-  top: 0;
-  z-index: 9999;  /* ✅ 무조건 최상단 */
+  position:fixed;          /* ✅ sticky 대신 fixed */
+  top:0;
+  left:0;
+  right:0;
+  z-index:99999;           /* ✅ 무조건 최상단 */
+
   background: rgba(7,10,15,.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
+
 .topbar__inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:16px 0;
   gap:16px;
+
+  /* ✅ 높이 고정 */
+  min-height: var(--topbar-h);
+  padding: 14px 0;
 }
 
 .brand{ display:flex; align-items:center; gap:12px; }
@@ -97,20 +111,21 @@ a{ color:inherit; text-decoration:none; }
 .lang__link{ opacity:.9; }
 .lang__link:hover{ opacity:1; text-decoration:underline; }
 
-/* Hero (배경 이미지 + 오버레이) */
+/* =========================
+   Hero
+========================= */
 .hero{
   position:relative;
   padding:80px 0 40px;
   overflow:hidden;
+  z-index:1;
 
-  /* 밝게 유지하면서 텍스트 가독성 확보 */
   background:
     linear-gradient(180deg, rgba(7,10,15,.52) 0%, rgba(7,10,15,.78) 100%),
     radial-gradient(900px 520px at 25% 10%, rgba(118,169,255,.12), transparent 60%),
     url('ship-hero1.png') center/cover no-repeat;
 }
 
-/* Hero layout */
 .hero__inner{
   display:grid;
   grid-template-columns: 1.2fr .8fr;
@@ -118,13 +133,11 @@ a{ color:inherit; text-decoration:none; }
   align-items:stretch;
 }
 
-/* Copy block: glass panel to prevent text being buried */
 .hero__copy{
   position:relative;
   z-index:1;
 }
 
-/* 글자 뒤에만 "유리판" */
 .hero__copy::before{
   content:"";
   position:absolute;
@@ -133,11 +146,11 @@ a{ color:inherit; text-decoration:none; }
   background: rgba(7,10,15,.22);
   border: 1px solid rgba(255,255,255,.12);
   backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   box-shadow: 0 18px 60px rgba(0,0,0,.35);
   z-index:-1;
 }
 
-/* Decorative background layer (kept from previous design) */
 .hero__bg{
   position:absolute; inset:-1px;
   background:
@@ -147,7 +160,6 @@ a{ color:inherit; text-decoration:none; }
   mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.2), transparent);
 }
 
-/* Pill */
 .pill{
   display:inline-flex;
   align-items:center;
@@ -162,7 +174,6 @@ a{ color:inherit; text-decoration:none; }
   text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
 
-/* H1 (2 lines fixed via spans) */
 h1{
   margin:0 0 14px;
   font-size: clamp(26px, 5.2vw, 44px);
@@ -181,7 +192,6 @@ h1{
   color:transparent;
 }
 
-/* Lead */
 .lead{
   margin:0 0 20px;
   color:rgba(234,240,255,.88);
@@ -190,13 +200,13 @@ h1{
   text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
 
-/* Buttons */
 .hero__actions{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
   margin:18px 0 16px;
 }
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -218,7 +228,6 @@ h1{
 }
 .btn--ghost{ background: rgba(255,255,255,.05); }
 
-/* Badges */
 .badges{
   display:flex;
   flex-wrap:wrap;
@@ -284,18 +293,22 @@ h1{
   opacity:.9;
 }
 
-/* Sections */
+/* =========================
+   Sections
+========================= */
 .section{
   position:relative;
   padding:64px 0;
   background: transparent;
+  z-index:1;
 }
+
 .section--alt{
   background: rgba(255,255,255,.03);
   border-top: 1px solid rgba(255,255,255,.08);
   border-bottom: 1px solid rgba(255,255,255,.08);
-}er-bottom: 1px solid rgba(255,255,255,.08);
 }
+
 .section__head{
   display:flex;
   flex-direction:column;
@@ -455,7 +468,9 @@ h1{
 .footer__right{ display:flex; gap:10px; align-items:center; color:rgba(234,240,255,.86); }
 .footer__sep{ opacity:.55; }
 
-/* Responsive */
+/* =========================
+   Responsive
+========================= */
 @media (max-width: 980px){
   .hero__inner{ grid-template-columns: 1fr; }
   .grid{ grid-template-columns: repeat(2, 1fr); }
@@ -465,18 +480,20 @@ h1{
 }
 
 @media (max-width: 560px){
+  :root{ --topbar-h: 70px; }
+
   .container{ width: calc(100% - 28px); }
 
   .hero{ padding:56px 0 32px; }
 
-  /* mobile: keep readability */
   h1{ font-size:28px; line-height:1.25; }
   .lead{ font-size:15px; line-height:1.7; }
 
   .hero__copy::before{
     inset:-14px;
-    background: rgba(7,10,15,.45);
-    backdrop-filter: blur(8px);
+    background: rgba(7,10,15,.30);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 
   .btn{ padding:11px 14px; font-size:13px; }
