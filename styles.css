@@ -801,3 +801,18 @@ section[id]{
   font-size:17px;
   letter-spacing:0.3px;
 }
+/* =========================
+   MOBILE: TITLE CLIP FIX
+========================= */
+@media (max-width: 560px){
+  .hero-title__line--white,
+  .hero-title__line--grad{
+    white-space: normal !important;   /* 줄바꿈 허용 */
+    overflow-wrap: anywhere;          /* 긴 단어(Execution Partner 등)도 줄바꿈 */
+    word-break: keep-all;             /* 한국어는 자연스럽게 */
+  }
+
+  .hero-title{
+    padding-right: 2px;               /* 글자 끝 잘림 방지 여유 */
+  }
+}
